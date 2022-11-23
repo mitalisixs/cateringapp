@@ -217,17 +217,16 @@
                         color:"red"
                     });
 
-                    bounds.extend(restoMarker.position);
-
-
-                    google.maps.event.addListener(restoMarker, 'click', (function(restoMarker, i) {
-                       
+                    restoMarker.addListener("click", () => {
                         var content="<a href=\"/orders?restorant_id="+restaurant.id+"\"><strong>"+restaurant.name+"</strong></a>";
-                        return function() {
-                            infowindow.setContent(content);
-                            infowindow.open(map, restoMarker);
-                        }
-                    })(restoMarker, i));
+                        infowindow.setContent(content);
+                        infowindow.open({
+                            anchor: restoMarker,
+                            map,
+                            shouldFocus: false,
+                        });
+                    });
+                    bounds.extend(restoMarker.position);
             });
 
             map.fitBounds(bounds);

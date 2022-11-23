@@ -107,6 +107,12 @@
 <div class="modal fade" id="modal-restaurant-info" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
     <div class="modal-dialog modal- modal-dialog-centered modal-lg" role="document" >
         <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="modalRestaurantTitle" class="modal-title">{{ $restorant->name }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
             <div class="modal-body p-0">
                 <div class="card">
                     <div class="card-header bg-white text-center">

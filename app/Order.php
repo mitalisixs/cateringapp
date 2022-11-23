@@ -239,7 +239,7 @@ class Order extends Model
                 return ["buttons"=>['rejected_by_restaurant','accepted_by_restaurant'],'message'=>""];
             }else if(in_array($lastStatusAlias,["assigned_to_driver","accepted_by_restaurant","accepted_by_driver","rejected_by_driver"])){
                 return ["buttons"=>['prepared'],'message'=>""];
-            }else if(in_array($lastStatusAlias,["prepared"])&&config('app.allow_self_deliver')&&$this->delivery_method.""=="2"){
+            }else if(in_array($lastStatusAlias,["prepared"])&&(config('app.allow_self_deliver')||$this->restorant->self_deliver.""=="1")/*&&$this->delivery_method.""=="2"*/){
                 return ["buttons"=>['delivered'],'message'=>""];
             }
         }else if(config('app.isqrsaas')){

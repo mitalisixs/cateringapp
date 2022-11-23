@@ -90,6 +90,7 @@
                                                 </span>
                                             @endif
                                         </div>
+                                        @include('partials.select', ['name'=>"Category",'id'=>"category_id",'placeholder'=>"Select category",'data'=>$categories,'required'=>true, 'value'=>$item->category_id])
                                         <div class="form-group{{ $errors->has('item_description') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="item_description">{{ __('Item Description') }}</label>
                                             <textarea id="item_description" name="item_description" class="form-control form-control-alternative{{ $errors->has('item_description') ? ' is-invalid' : '' }}" placeholder="{{ __('Item Description here ... ') }}" value="{{ old('item_description', $item->description) }}" required autofocus rows="3">{{ old('item_description', $item->description) }}</textarea>

@@ -87,7 +87,7 @@
 
             @if(config('settings.restoloyalty_token'))
             @if(auth()->user()->hasRole('admin'))
-                <hr class="my-3">
+                <!-- <hr class="my-3">
                 <h6 class="navbar-heading text-muted">{{ __('External plugins')}}</h6>
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -95,7 +95,7 @@
                             <i class="ni ni-credit-card text-info"></i> {{ __('Loyalty Platform') }}
                         </a>
                     </li>
-                </ul>
+                </ul> -->
             @endif
             @endif
 
@@ -103,7 +103,7 @@
             <hr class="my-3">
             <!-- Heading -->
             @if(auth()->user()->hasRole('admin'))
-            <h6 class="navbar-heading text-muted">{{ __('Version')}} {{ config('config.version')}}   <span id="uptodate" class="badge badge-success" style="display:none;">{{ __('latest') }}</span></h6>
+            <!-- <h6 class="navbar-heading text-muted">{{ __('Version')}} {{ config('config.version')}}   <span id="uptodate" class="badge badge-success" style="display:none;">{{ __('latest') }}</span></h6>
                 <h6>{{ \Carbon\Carbon::now() }} </h6>
                 
                 <hr class="my-3">
@@ -116,7 +116,7 @@
                     <button type="button" style="margin-left: 20px" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                </div> 
+                </div>  -->
                 
             @endif
             
