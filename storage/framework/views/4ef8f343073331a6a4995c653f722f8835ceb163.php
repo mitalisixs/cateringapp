@@ -23,6 +23,7 @@
                                 <?php endif; ?>
                             </div>
                             <div class="text-center">
+                            <input name="parent_id" id="parent_id" type="hidden" value="0" required>
                                 <button type="submit" class="btn btn-primary my-4"><?php echo e(__('Save')); ?></button>
                             </div>
                         </form>
@@ -187,6 +188,7 @@
                                 </div>
                             </div>
                             <input name="res_id" id="res_id" type="hidden" value="<?php echo e($restorant_id); ?>" required>
+                          
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary my-4"><?php echo e(__('Save')); ?></button>
                             </div>
