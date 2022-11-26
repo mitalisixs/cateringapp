@@ -1,7 +1,7 @@
 @extends('layouts.app', ['title' => __('Orders')])
 
 @section('content')
-    <div class="modal fade" id="modal-new-extras" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+    <!-- <div class="modal fade" id="modal-new-extras" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
         <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -42,7 +42,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <script>
         function setRestaurantId(id){
             $('#res_id').val(id);
@@ -100,7 +100,7 @@
                                                 </span>
                                             @endif
                                         </div>
-                                        <div class="form-group{{ $errors->has('item_price') ? ' has-danger' : '' }}">
+                                        <!-- <div class="form-group{{ $errors->has('item_price') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="item_price">{{ __('Item Price') }}</label>
                                             <input type="number" step="any" name="item_price" id="item_price" class="form-control form-control-alternative{{ $errors->has('item_price') ? ' is-invalid' : '' }}" placeholder="{{ __('Price') }}" value="{{ old('item_price', $item->price) }}" required autofocus>
                                             @if ($errors->has('item_price'))
@@ -108,12 +108,13 @@
                                                     <strong>{{ $errors->first('item_price') }}</strong>
                                                 </span>
                                             @endif
-                                        </div>
-                                        @include('partials.input',['id'=>'vat','name'=>__('VAT percentage( calculated into item price )'),'placeholder'=>__('Item VAT percentage'),'value'=>$item->vat,'required'=>false,'type'=>'number'])
+                                        </div> -->
+                                        <input type="hidden" step="any" name="item_price" id="item_price" class="form-control form-control-alternative{{ $errors->has('item_price') ? ' is-invalid' : '' }}" placeholder="{{ __('Price') }}" value="0" required autofocus>
+                                        <!-- @include('partials.input',['id'=>'vat','name'=>__('VAT percentage( calculated into item price )'),'placeholder'=>__('Item VAT percentage'),'value'=>$item->vat,'required'=>false,'type'=>'number']) -->
                                         <?php $image=['name'=>'item_image','label'=>__('Item Image'),'value'=> $item->logom,'style'=>'width: 290px; height:200']; ?>
                                         @include('partials.images',$image)
                                         @include('partials.toggle',['id'=>'itemAvailable','name'=>'Item available','checked'=>($item->available == 1)])
-                                        @include('partials.toggle',['id'=>'has_variants','name'=>'Enable variants','checked'=>($item->has_variants==1)])
+                                        <!-- @include('partials.toggle',['id'=>'has_variants','name'=>'Enable variants','checked'=>($item->has_variants==1)]) -->
                                     </div>
                                     <div class="col-md-6">
                                     </div>
@@ -133,7 +134,7 @@
                         </div>
                     </div>
             </div>
-            <div class="col-xl-6 mb-6 mb-xl-0">
+            <!-- <div class="col-xl-6 mb-6 mb-xl-0">
                     <br/>
 
                     @if ($item->has_variants==1)
@@ -231,7 +232,7 @@
                     </div>
 
 
-            </div>
+            </div> -->
         </div>
         @include('layouts.footers.auth')
     </div>

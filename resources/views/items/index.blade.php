@@ -203,7 +203,7 @@
                                                     <h3 class="card-title text-primary text-uppercase">{{ $item->name }}</h3>
                                                     <p class="card-text description mt-3">{{ $item->description }}</p>
 
-                                                    <span class="badge badge-primary badge-pill">@money($item->price, config('settings.cashier_currency'),config('settings.do_convertion'))</span>
+                                                    <!-- <span class="badge badge-primary badge-pill">@money($item->price, config('settings.cashier_currency'),config('settings.do_convertion'))</span>
 
                                                     <p class="mt-3 mb-0 text-sm">
                                                         @if($item->available == 1)
@@ -211,7 +211,7 @@
                                                         @else
                                                         <span class="text-danger mr-2">{{ __("UNAVAILABLE") }}</span>
                                                         @endif
-                                                    </p>
+                                                    </p> -->
                                                 </div>
                                             </div>
                                             <br />

@@ -1,5 +1,5 @@
 <?php $__env->startSection('content'); ?>
-    <div class="modal fade" id="modal-new-extras" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+    <!-- <div class="modal fade" id="modal-new-extras" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
         <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -40,7 +40,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <script>
         function setRestaurantId(id){
             $('#res_id').val(id);
@@ -98,7 +98,7 @@
                                                 </span>
                                             <?php endif; ?>
                                         </div>
-                                        <div class="form-group<?php echo e($errors->has('item_price') ? ' has-danger' : ''); ?>">
+                                        <!-- <div class="form-group<?php echo e($errors->has('item_price') ? ' has-danger' : ''); ?>">
                                             <label class="form-control-label" for="item_price"><?php echo e(__('Item Price')); ?></label>
                                             <input type="number" step="any" name="item_price" id="item_price" class="form-control form-control-alternative<?php echo e($errors->has('item_price') ? ' is-invalid' : ''); ?>" placeholder="<?php echo e(__('Price')); ?>" value="<?php echo e(old('item_price', $item->price)); ?>" required autofocus>
                                             <?php if($errors->has('item_price')): ?>
@@ -106,12 +106,13 @@
                                                     <strong><?php echo e($errors->first('item_price')); ?></strong>
                                                 </span>
                                             <?php endif; ?>
-                                        </div>
-                                        <?php echo $__env->make('partials.input',['id'=>'vat','name'=>__('VAT percentage( calculated into item price )'),'placeholder'=>__('Item VAT percentage'),'value'=>$item->vat,'required'=>false,'type'=>'number'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                                        </div> -->
+                                        <input type="hidden" step="any" name="item_price" id="item_price" class="form-control form-control-alternative<?php echo e($errors->has('item_price') ? ' is-invalid' : ''); ?>" placeholder="<?php echo e(__('Price')); ?>" value="0" required autofocus>
+                                        <!-- <?php echo $__env->make('partials.input',['id'=>'vat','name'=>__('VAT percentage( calculated into item price )'),'placeholder'=>__('Item VAT percentage'),'value'=>$item->vat,'required'=>false,'type'=>'number'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?> -->
                                         <?php $image=['name'=>'item_image','label'=>__('Item Image'),'value'=> $item->logom,'style'=>'width: 290px; height:200']; ?>
                                         <?php echo $__env->make('partials.images',$image, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                         <?php echo $__env->make('partials.toggle',['id'=>'itemAvailable','name'=>'Item available','checked'=>($item->available == 1)], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                                        <?php echo $__env->make('partials.toggle',['id'=>'has_variants','name'=>'Enable variants','checked'=>($item->has_variants==1)], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                                        <!-- <?php echo $__env->make('partials.toggle',['id'=>'has_variants','name'=>'Enable variants','checked'=>($item->has_variants==1)], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?> -->
                                     </div>
                                     <div class="col-md-6">
                                     </div>
@@ -131,7 +132,7 @@
                         </div>
                     </div>
             </div>
-            <div class="col-xl-6 mb-6 mb-xl-0">
+            <!-- <div class="col-xl-6 mb-6 mb-xl-0">
                     <br/>
 
                     <?php if($item->has_variants==1): ?>
@@ -230,7 +231,7 @@
                     </div>
 
 
-            </div>
+            </div> -->
         </div>
         <?php echo $__env->make('layouts.footers.auth', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </div>
