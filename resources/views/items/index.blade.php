@@ -70,8 +70,7 @@
                             <div class="card">
                                 <img class="card-img-top" src="{{ asset('images') }}/default/add_new_item.jpg" alt="...">
                                 <div class="card-body">
-                                    <h3 class="card-title text-primary text-uppercase">{{ __('Add first <Sub>
-                                    </Sub> category') }}</h3>
+                                    <h3 class="card-title text-primary text-uppercase">{{ __('Add first category') }}</h3>
                                 </div>.
                             </div>
                         </a>
