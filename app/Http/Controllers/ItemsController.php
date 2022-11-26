@@ -179,7 +179,7 @@ class ItemsController extends Controller
                 'item' => $item,
                 'setup'=>['items'=>$item->variants()->paginate(100)],
                 'restorant' => $item->category->restorant,
-                'categories'=> $item->category->restorant->categories->pluck('name','id'),
+                'categories'=> $item->category->restorant->allcategories->pluck('name','id'),
                 'restorant_id' => $item->category->restorant->id, ]);
         } else {
             return redirect()->route('items.index')->withStatus(__('No Access'));
