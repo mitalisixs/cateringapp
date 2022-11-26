@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => __('Restaurant Menu Management')])
+@extends('layouts.app', ['title' => __('Catering Menu Management')])
 @section('admin_title')
 {{__('Menu')}}
 @endsection
