@@ -22,7 +22,11 @@
                     <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal-import-items" onClick=(setRestaurantId({{ $restorant_id }}))>
                         <span class="btn-inner--icon"><i class="fa fa-file-excel"></i> {{ __('Import from CSV') }}</span>
                     </button>
+                    <a class="btn btn-sm btn-warning" href="{{asset('sample/menu.xlsx')}}">{{ __("Download Sample CSV") }}</a>
+                    
+													 
                     @endif
+
                     @if(config('settings.enable_miltilanguage_menus'))
                     @include('items.partials.languages')
                     @endif
