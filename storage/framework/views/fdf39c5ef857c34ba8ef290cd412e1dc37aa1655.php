@@ -170,7 +170,7 @@
                                             <span class="btn-inner--icon"><i class="fa fa-plus"></i> <?php echo e(__('Menu size limit reaced')); ?></span>
                                         </a>
                                         <?php endif; ?>
-                                        <button class="btn btn-icon btn-1 btn-sm btn-warning" type="button" id="edit" data-toggle="modal" data-target="#modal-edit-sub-category" data-toggle="tooltip" data-placement="top" title="<?php echo e(__('Edit Sub category')); ?> <?php echo e($subcategory->name); ?>" data-id="<?= $subcategory->id ?>" data-name="<?= $subcategory->name ?>">
+                                        <button class="btn btn-icon btn-1 btn-sm btn-warning" type="button" id="edit" data-toggle="modal" data-target="#modal-edit-category" data-toggle="tooltip" data-placement="top" title="<?php echo e(__('Edit Sub category')); ?> <?php echo e($subcategory->name); ?>" data-id="<?= $subcategory->id ?>" data-name="<?= $subcategory->name ?>">
                                             <span class="btn-inner--icon"><i class="fa fa-edit"></i></span>
                                         </button>
 
@@ -198,12 +198,12 @@
                                     <div class="col-lg-3">
                                         <a href="<?php echo e(route('items.edit', $item)); ?>">
                                             <div class="card">
-                                                <img class="card-img-top" src="<?php echo e($item->logom); ?>" alt="...">
+                                                <img class="card-img-top" src="<?php echo e(asset('/').$item->logom); ?>" alt="...">
                                                 <div class="card-body">
                                                     <h3 class="card-title text-primary text-uppercase"><?php echo e($item->name); ?></h3>
                                                     <p class="card-text description mt-3"><?php echo e($item->description); ?></p>
 
-                                                    <span class="badge badge-primary badge-pill"><?php echo money($item->price, config('settings.cashier_currency'),config('settings.do_convertion')); ?></span>
+                                                    <!-- <span class="badge badge-primary badge-pill"><?php echo money($item->price, config('settings.cashier_currency'),config('settings.do_convertion')); ?></span>
 
                                                     <p class="mt-3 mb-0 text-sm">
                                                         <?php if($item->available == 1): ?>
@@ -211,7 +211,7 @@
                                                         <?php else: ?>
                                                         <span class="text-danger mr-2"><?php echo e(__("UNAVAILABLE")); ?></span>
                                                         <?php endif; ?>
-                                                    </p>
+                                                    </p> -->
                                                 </div>
                                             </div>
                                             <br />
@@ -256,7 +256,8 @@
 
         //$('#cat_id').val(id);
         $('#cat_name').val(name);
-        $("#form-edit-category").attr("action", "/categories/" + id);
+        var  editUrl="<?php echo e(URL::to('categories')); ?>/"+id;
+        $("#form-edit-category").attr("action", editUrl);
     })
 </script>
 <?php $__env->stopSection(); ?>
