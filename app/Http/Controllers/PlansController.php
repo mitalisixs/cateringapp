@@ -44,7 +44,7 @@ class PlansController extends Controller
 
         
         if ($theSelectedProcessor == 'stripe') {
-            $data['intent'] = auth()->user()->createSetupIntent();
+            //$data['intent'] = auth()->user()->createSetupIntent();
 
             if (auth()->user()->subscribed('main')) {
                 //Subscribed
