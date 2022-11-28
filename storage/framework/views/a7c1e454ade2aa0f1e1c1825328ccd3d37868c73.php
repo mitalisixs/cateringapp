@@ -87,7 +87,7 @@
 
             <?php if(config('settings.restoloyalty_token')): ?>
             <?php if(auth()->user()->hasRole('admin')): ?>
-                <hr class="my-3">
+                <!-- <hr class="my-3">
                 <h6 class="navbar-heading text-muted"><?php echo e(__('External plugins')); ?></h6>
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -96,7 +96,7 @@
 
                         </a>
                     </li>
-                </ul>
+                </ul> -->
             <?php endif; ?>
             <?php endif; ?>
 
@@ -104,7 +104,7 @@
             <hr class="my-3">
             <!-- Heading -->
             <?php if(auth()->user()->hasRole('admin')): ?>
-            <h6 class="navbar-heading text-muted"><?php echo e(__('Version')); ?> <?php echo e(config('config.version')); ?>   <span id="uptodate" class="badge badge-success" style="display:none;"><?php echo e(__('latest')); ?></span></h6>
+            <!-- <h6 class="navbar-heading text-muted"><?php echo e(__('Version')); ?> <?php echo e(config('config.version')); ?>   <span id="uptodate" class="badge badge-success" style="display:none;"><?php echo e(__('latest')); ?></span></h6>
                 <h6><?php echo e(\Carbon\Carbon::now()); ?> </h6>
                 
                 <hr class="my-3">
@@ -117,7 +117,7 @@
                     <button type="button" style="margin-left: 20px" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                </div> 
+                </div>  -->
                 
             <?php endif; ?>
             

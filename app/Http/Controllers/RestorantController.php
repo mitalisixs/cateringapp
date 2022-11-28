@@ -341,7 +341,9 @@ class RestorantController extends Controller
         $restaurant->is_featured = $request->is_featured != null ? 1 : 0;
         $restaurant->can_pickup = $request->can_pickup == 'true' ? 1 : 0;
         $restaurant->can_deliver = $request->can_deliver == 'true' ? 1 : 0;
-        $restaurant->self_deliver = $request->self_deliver == 'true' ? 1 : 0;
+        if($request->has('self_deliver')){
+            $restaurant->self_deliver = $request->self_deliver == 'true' ? 1 : 0;
+        }
         $restaurant->free_deliver = $request->free_deliver == 'true' ? 1 : 0;
 
         if($request->has('disable_callwaiter')){

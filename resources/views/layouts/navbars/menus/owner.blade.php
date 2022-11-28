@@ -33,20 +33,20 @@
 
     @if (config('app.isqrsaas') && (!config('settings.qrsaas_disable_odering') || config('settings.enable_guest_log')))
         @if(!config('settings.is_whatsapp_ordering_mode'))
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.restaurant.tables.index') }}">
                     <i class="ni ni-ungroup text-red"></i> {{ __('Tables') }}
                 </a>
-            </li>
+            </li> -->
         @endif
     @endif
 
     @if (config('app.isqrsaas')&&!config('settings.is_whatsapp_ordering_mode'))
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" href="{{ route('qr') }}">
                 <i class="ni ni-mobile-button text-red"></i> {{ __('QR Builder') }}
             </a>
-        </li>
+        </li> -->
         @if(config('settings.enable_guest_log'))
         <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.restaurant.visits.index') }}">
@@ -65,11 +65,11 @@
     @endif
 
     @if(config('settings.enable_pricing'))
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" href="{{ route('plans.current') }}">
                 <i class="ni ni-credit-card text-orange"></i> {{ __('Plan') }}
             </a>
-        </li>
+        </li> -->
     @endif
 
         @if(config('app.ordering')&&config('settings.enable_finances_owner'))
@@ -89,11 +89,11 @@
     -->
 
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
             <a class="nav-link" href="{{ route('share.menu') }}">
                 <i class="ni ni-send text-green"></i> {{ __('Share') }}
             </a>
-    </li>
+    </li> -->
 
     @foreach (auth()->user()->getExtraMenus() as $menu)
             <li class="nav-item">

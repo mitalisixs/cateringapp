@@ -23,6 +23,7 @@
                                 @endif
                             </div>
                             <div class="text-center">
+                            <input name="parent_id" id="parent_id" type="hidden" value="0" required>
                                 <button type="submit" class="btn btn-primary my-4">{{ __('Save') }}</button>
                             </div>
                         </form>
@@ -128,14 +129,15 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="form-group{{ $errors->has('item_price') ? ' has-danger' : '' }}">
+                            <!-- <div class="form-group{{ $errors->has('item_price') ? ' has-danger' : '' }}">
                                 <input class="form-control" name="item_price" id="item_price" placeholder="{{ __('Item Price') }} ..." type="number" step="any" required>
                                 @if ($errors->has('item_price'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('item_price') }}</strong>
                                     </span>
                                 @endif
-                            </div>
+                            </div> -->
+                            <input class="form-control" name="item_price" id="item_price" placeholder="{{ __('Item Price') }} ..." type="hidden" step="any" required value="0">
                             <div class="form-group text-center{{ $errors->has('item_image') ? ' has-danger' : '' }}">
                                 <label class="form-control-label" for="item_image">{{ __('Item Image') }}</label>
                                 <div class="text-center">
@@ -187,6 +189,7 @@
                                 </div>
                             </div>
                             <input name="res_id" id="res_id" type="hidden" value="{{ $restorant_id }}" required>
+                          
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary my-4">{{ __('Save') }}</button>
                             </div>

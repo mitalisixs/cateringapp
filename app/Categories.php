@@ -32,6 +32,10 @@ class Categories extends TranslateAwareModel implements Sortable
     {
         return $this->hasMany(\App\Items::class, 'category_id', 'id');
     }
+    public function subcategories()
+    {
+        return $this->hasMany(\App\Categories::class, 'parent_id', 'id')->where(['categories.active' => 1])->ordered();
+    }
 
     public function aitems()
     {

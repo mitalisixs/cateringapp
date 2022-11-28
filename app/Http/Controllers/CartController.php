@@ -175,6 +175,19 @@ class CartController extends Controller
                 if($restaurant->currency!=""&&$restaurant->currency!=config('settings.cashier_currency')){
                     //$enablePayments=false; -- DO this check only when money goes to admin 
                 }
+
+                //In case, we use vendor defined Stripe, we need to check if keys are present
+                if(config('settings.stripe_useVendor')){
+                    if($restaurant->getConfig('stripe_enable')=="true"){
+                        //We have stripe
+                        config(['settings.enable_stripe' => true]);
+                        config(['settings.stripe_key' => $restaurant->getConfig('stripe_key')]);
+                        config(['settings.stripe_secret' => $restaurant->getConfig('stripe_secret')]);
+                    }else{
+                        //Stripe for this vendor is disabled
+                        config(['settings.enable_stripe' => false]);
+                    }
+                }
             }
 
             //Change currency

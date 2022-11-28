@@ -36,8 +36,10 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         $category = new Categories;
+       // dd($request->all());
         $category->name = strip_tags($request->category_name);
         $category->restorant_id = $request->restaurant_id;
+        $category->parent_id = $request->parent_id;
         $category->save();
 
         if (auth()->user()->hasRole('admin')) {

@@ -16,7 +16,7 @@
                         <p>{{ __('error_404_resolve')}}</p>
                       
                         <br />
-                        <a href="/" class="btn btn-primary">{{ __('Go home') }}</a>
+                        <a href="{{URL::to('/')}}" class="btn btn-primary">{{ __('Go home') }}</a>
                         
                         
                     </div>

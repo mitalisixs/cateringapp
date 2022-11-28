@@ -97,7 +97,7 @@
                 </a>
             </li>
             <?php endif; ?>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <?php
                 $theLocaleToOpen=strtolower(config('settings.app_locale'));
                 if( strtolower(session('applocale_change')).""!=""){
@@ -108,14 +108,14 @@
                 <i class="ni ni-world text-orange"></i><?php echo e(__('Translations')); ?>
 
             </a>
-        </li>
+        </li> -->
         <?php else: ?>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" target="_blank" href="<?php echo e(url('/admin/languages')."/".strtolower(config('settings.app_locale'))."/translations"); ?>">
                 <i class="ni ni-world text-orange"></i> <?php echo e(__('Translations')); ?>
 
             </a>
-        </li>
+        </li> -->
         <?php endif; ?>
         <li class="nav-item">
             <a class="nav-link" href="<?php echo e(route('settings.index')); ?>">
@@ -125,20 +125,20 @@
         </li>
 
         <?php if(!config('settings.hideApps')): ?>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="<?php echo e(route('apps.index')); ?>">
                     <i class="ni ni-spaceship text-red"></i> <?php echo e(__('Apps')); ?>
 
                 </a>
-            </li>
+            </li> -->
         <?php endif; ?>
 
         
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" href="<?php echo e(route('settings.cloudupdate')); ?>">
                 <i class="ni ni-cloud-download-95 text-blue"></i> <?php echo e(__('Updates')); ?>
 
             </a>
-        </li>
+        </li> -->
 </ul>
 <?php /**PATH C:\wamp64\www\CategoringManagement\resources\views/layouts/navbars/menus/admin.blade.php ENDPATH**/ ?>

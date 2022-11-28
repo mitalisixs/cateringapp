@@ -85,7 +85,7 @@
                 </a>
             </li>
             @endif
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <?php
                 $theLocaleToOpen=strtolower(config('settings.app_locale'));
                 if( strtolower(session('applocale_change')).""!=""){
@@ -95,13 +95,13 @@
             <a class="nav-link" target="_blank" href="{{ url('/admin/languages')."/".$theLocaleToOpen."/translations".(config('app.isqrsaas')?"?group=qrlanding":"") }}">
                 <i class="ni ni-world text-orange"></i>{{ __('Translations') }}
             </a>
-        </li>
+        </li> -->
         @else
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" target="_blank" href="{{ url('/admin/languages')."/".strtolower(config('settings.app_locale'))."/translations" }}">
                 <i class="ni ni-world text-orange"></i> {{ __('Translations') }}
             </a>
-        </li>
+        </li> -->
         @endif
         <li class="nav-item">
             <a class="nav-link" href="{{ route('settings.index') }}">
@@ -110,17 +110,17 @@
         </li>
 
         @if(!config('settings.hideApps'))
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="{{ route('apps.index') }}">
                     <i class="ni ni-spaceship text-red"></i> {{ __('Apps') }}
                 </a>
-            </li>
+            </li> -->
         @endif
 
         
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" href="{{ route('settings.cloudupdate') }}">
                 <i class="ni ni-cloud-download-95 text-blue"></i> {{ __('Updates') }}
             </a>
-        </li>
+        </li> -->
 </ul>

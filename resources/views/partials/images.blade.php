@@ -6,7 +6,7 @@
     <div class="text-center">
         <div class="fileinput fileinput-new" data-provides="fileinput">
             <div class="fileinput-preview img-thumbnail" data-trigger="fileinput" style="{{ $image['style'] }}">
-            <img src="{{ $image['value'] }}" alt="..."/>
+            <img src="{{ asset('/').$image['value'] }}" alt="..."/>
         </div>
             <div>
                 <span class="btn btn-outline-secondary btn-file">
