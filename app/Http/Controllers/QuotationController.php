@@ -28,7 +28,7 @@ use App\Models\SimpleDelivery;
 class QuotationController extends Controller
 {
 
-   
+
     public function migrateStatuses()
     {
         if (Status::count() < 13) {
@@ -48,9 +48,9 @@ class QuotationController extends Controller
     {
         $this->migrateStatuses();
 
-        $restorants = Restorant::where(['active'=>1])->get();
-        $drivers = User::role('driver')->where(['active'=>1])->get();
-        $clients = User::role('client')->where(['active'=>1])->get();
+        $restorants = Restorant::where(['active' => 1])->get();
+        $drivers = User::role('driver')->where(['active' => 1])->get();
+        $clients = User::role('client')->where(['active' => 1])->get();
 
         $driversData = [];
         foreach ($drivers as $key => $driver) {
@@ -61,44 +61,44 @@ class QuotationController extends Controller
 
         //Get client's quotations
         if (auth()->user()->hasRole('client')) {
-            $quotations = $quotations->where(['client_id'=>auth()->user()->id]);
-        ////Get driver's quotations
+            $quotations = $quotations->where(['client_id' => auth()->user()->id]);
+            ////Get driver's quotations
         } elseif (auth()->user()->hasRole('driver')) {
-            $quotations = $quotations->where(['driver_id'=>auth()->user()->id]);
-        //Get owner's restorant quotations
+            $quotations = $quotations->where(['driver_id' => auth()->user()->id]);
+            //Get owner's restorant quotations
         } elseif (auth()->user()->hasRole('owner')) {
-             
+
             //Change currency
             ConfChanger::switchCurrency(auth()->user()->restorant);
 
-            $quotations = $quotations->where(['restorant_id'=>auth()->user()->restorant->id]);
-        }elseif (auth()->user()->hasRole('staff')) {
-             
+            $quotations = $quotations->where(['restorant_id' => auth()->user()->restorant->id]);
+        } elseif (auth()->user()->hasRole('staff')) {
+
             //Change currency
             ConfChanger::switchCurrency(auth()->user()->restaurant);
 
-            $quotations = $quotations->where(['restorant_id'=>auth()->user()->restaurant_id]);
+            $quotations = $quotations->where(['restorant_id' => auth()->user()->restaurant_id]);
         }
 
         //FILTER BT RESTORANT
         if (isset($_GET['restorant_id'])) {
-            $quotations = $quotations->where(['restorant_id'=>$_GET['restorant_id']]);
+            $quotations = $quotations->where(['restorant_id' => $_GET['restorant_id']]);
         }
         //If restorant owner, get his restorant quotations only
         if (auth()->user()->hasRole('owner')) {
             //Current restorant id
             $restorant_id = auth()->user()->restorant->id;
-            $quotations = $quotations->where(['restorant_id'=>$restorant_id]);
+            $quotations = $quotations->where(['restorant_id' => $restorant_id]);
         }
 
         //BY CLIENT
         if (isset($_GET['client_id'])) {
-            $quotations = $quotations->where(['client_id'=>$_GET['client_id']]);
+            $quotations = $quotations->where(['client_id' => $_GET['client_id']]);
         }
 
         //BY DRIVER
         if (isset($_GET['driver_id'])) {
-            $quotations = $quotations->where(['driver_id'=>$_GET['driver_id']]);
+            $quotations = $quotations->where(['driver_id' => $_GET['driver_id']]);
         }
 
         //BY DATE FROM
@@ -118,61 +118,52 @@ class QuotationController extends Controller
             $items = [];
             foreach ($quotations->get() as $key => $quotation) {
                 $item = [
-                    'quotation_id'=>$quotation->id,
-                    'restaurant_name'=>$quotation->restorant->name,
-                    'restaurant_id'=>$quotation->restorant_id,
-                    'created'=>$quotation->created_at,
-                    'last_status'=>$quotation->status->pluck('alias')->last(),
-                    'client_name'=>$quotation->client ? $quotation->client->name : '',
-                    'client_id'=>$quotation->client ? $quotation->client_id : null,
-                    'table_name'=>$quotation->table ? $quotation->table->name : '',
-                    'table_id'=>$quotation->table ? $quotation->table_id : null,
-                    'area_name'=>$quotation->table && $quotation->table->restoarea ? $quotation->table->restoarea->name : '',
-                    'area_id'=>$quotation->table && $quotation->table->restoarea ? $quotation->table->restoarea->id : null,
-                    'address'=>$quotation->address ? $quotation->address->address : '',
-                    'address_id'=>$quotation->address_id,
-                    'driver_name'=>$quotation->driver ? $quotation->driver->name : '',
-                    'driver_id'=>$quotation->driver_id,
-                    'quotation_value'=>$quotation->quotation_price,
-                    'quotation_delivery'=>$quotation->delivery_price,
-                    'quotation_total'=>$quotation->delivery_price + $quotation->quotation_price,
-                    'payment_method'=>$quotation->payment_method,
-                    'srtipe_payment_id'=>$quotation->srtipe_payment_id,
-                    'quotation_fee'=>$quotation->fee_value,
-                    'restaurant_fee'=>$quotation->fee,
-                    'restaurant_static_fee'=>$quotation->static_fee,
-                    'vat'=>$quotation->vatvalue,
-                  ];
+                    'quotation_id' => $quotation->id,
+                    'restaurant_name' => $quotation->restorant->name,
+                    'restaurant_id' => $quotation->restorant_id,
+                    'created' => $quotation->created_at,
+                    'last_status' => $quotation->status->pluck('alias')->last(),
+                    'client_name' => $quotation->client ? $quotation->client->name : '',
+                    'client_id' => $quotation->client ? $quotation->client_id : null,
+                    'table_name' => $quotation->table ? $quotation->table->name : '',
+                    'table_id' => $quotation->table ? $quotation->table_id : null,
+                    'area_name' => $quotation->table && $quotation->table->restoarea ? $quotation->table->restoarea->name : '',
+                    'area_id' => $quotation->table && $quotation->table->restoarea ? $quotation->table->restoarea->id : null,
+                    'address' => $quotation->address ? $quotation->address->address : '',
+                    'address_id' => $quotation->address_id,
+                    'driver_name' => $quotation->driver ? $quotation->driver->name : '',
+                    'driver_id' => $quotation->driver_id,
+                    'quotation_value' => $quotation->quotation_price,
+                    'quotation_delivery' => $quotation->delivery_price,
+                    'quotation_total' => $quotation->delivery_price + $quotation->quotation_price,
+                    'payment_method' => $quotation->payment_method,
+                    'srtipe_payment_id' => $quotation->srtipe_payment_id,
+                    'quotation_fee' => $quotation->fee_value,
+                    'restaurant_fee' => $quotation->fee,
+                    'restaurant_static_fee' => $quotation->static_fee,
+                    'vat' => $quotation->vatvalue,
+                ];
                 array_push($items, $item);
             }
 
-            return Excel::download(new QuotationsExport($items), 'quotations_'.time().'.xlsx');
+            return Excel::download(new QuotationsExport($items), 'quotations_' . time() . '.xlsx');
         }
 
         $quotations = $quotations->paginate(10);
 
         return view('quotations.index', [
             'quotations' => $quotations,
-            'restorants'=>$restorants,
-            'drivers'=>$drivers,
-            'fields'=>[['class'=>'col-12', 'classselect'=>'noselecttwo', 'ftype'=>'select', 'name'=>'Driver', 'id'=>'driver', 'placeholder'=>'Assign Driver', 'data'=>$driversData, 'required'=>true]],
-            'clients'=>$clients,
-            'parameters'=>count($_GET) != 0,
+            'restorants' => $restorants,
+            'drivers' => $drivers,
+            'fields' => [['class' => 'col-12', 'classselect' => 'noselecttwo', 'ftype' => 'select', 'name' => 'Driver', 'id' => 'driver', 'placeholder' => 'Assign Driver', 'data' => $driversData, 'required' => true]],
+            'clients' => $clients,
+            'parameters' => count($_GET) != 0,
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    private function toMobileLike(Request $request)
     {
-    }
-
-    
-
-    private function toMobileLike(Request $request){
         /*{
             "restaurant_id":1,
             "delivery_method":"delivery", //delivery, pickup, dinein
@@ -200,153 +191,174 @@ class QuotationController extends Controller
         $restorant = Restorant::findOrFail($vendor_id);
 
         //Organize the item
-        $items=[];
+        $items = [];
         foreach (Cart::getContent() as $key => $item) {
-            $extras=[];
+            $extras = [];
             foreach ($item->attributes->extras as $keyExtra => $extra_id) {
-                array_push($extras,array('id'=>$extra_id));
+                array_push($extras, array('id' => $extra_id));
             }
-            array_push($items,array(
-                "id"=>$item->attributes->id,
-                "qty"=>$item->quantity,
-                "variant"=>$item->attributes->variant,
-                "extrasSelected"=>$extras
+            array_push($items, array(
+                "id" => $item->attributes->id,
+                "qty" => $item->quantity,
+                "variant" => $item->attributes->variant,
+                "extrasSelected" => $extras
             ));
         }
 
 
         //stripe token
-        $stripe_token=null;
-        if($request->has('stripePaymentId')){
-            $stripe_token=$request->stripePaymentId;
+        $stripe_token = null;
+        if ($request->has('stripePaymentId')) {
+            $stripe_token = $request->stripePaymentId;
         }
 
         //Custom fields
-        $customFields=[];
-        if($request->has('custom')){
-            $customFields=$request->custom;
+        $customFields = [];
+        if ($request->has('custom')) {
+            $customFields = $request->custom;
         }
 
-        
-       
+
+
 
         //DELIVERY METHOD
         //Default - pickup - since available everywhere
-        $delivery_method="pickup";
-        
+        $delivery_method = "pickup";
+
         //Delivery method - deliveryType - ft
-        if($request->has('deliveryType')){
-            $delivery_method=$request->deliveryType;
-        }else if($restorant->can_pickup == 0 && $restorant->can_deliver == 1){
-            $delivery_method="delivery";
+        if ($request->has('deliveryType')) {
+            $delivery_method = $request->deliveryType;
+        } else if ($restorant->can_pickup == 0 && $restorant->can_deliver == 1) {
+            $delivery_method = "delivery";
         }
 
         //Delivery method  - dineType - qr
-        if($request->has('dineType')){
-            $delivery_method=$request->dineType;
+        if ($request->has('dineType')) {
+            $delivery_method = $request->dineType;
         }
 
 
 
         //In case it is QR, and there is no dineInType, and pickup is diabled, it is dine in
-        if(config('app.isqrsaas')&&!$request->has('dineType')&&!config('settings.is_whatsapp_quotationing_mode')){
-            $delivery_method='dinein';
+        if (config('app.isqrsaas') && !$request->has('dineType') && !config('settings.is_whatsapp_quotationing_mode')) {
+            $delivery_method = 'dinein';
         }
         //takeaway is pickup
-        if($delivery_method=="takeaway"){
-            $delivery_method="pickup";
+        if ($delivery_method == "takeaway") {
+            $delivery_method = "pickup";
         }
 
         //Table id
-        $table_id=null;
-        if($request->has('table_id')){
-            $table_id=$request->table_id;
+        $table_id = null;
+        if ($request->has('table_id')) {
+            $table_id = $request->table_id;
         }
 
-         //Phone 
-         $phone=null;
-         if($request->has('phone')){
-             $phone=$request->phone;
-         }
+        //Phone 
+        $phone = null;
+        if ($request->has('phone')) {
+            $phone = $request->phone;
+        }
 
         //Delivery area
-        $deliveryAreaId=$request->has('delivery_area')?$request->delivery_area:null;
-        if($deliveryAreaId){
+        $deliveryAreaId = $request->has('delivery_area') ? $request->delivery_area : null;
+        if ($deliveryAreaId) {
             //Set this in custom field
-            $deliveryAreaName="";
-            $deliveryAreaElement=SimpleDelivery::find($request->delivery_area);
-            if($deliveryAreaElement){
-                $deliveryAreaName=$deliveryAreaElement->name;
+            $deliveryAreaName = "";
+            $deliveryAreaElement = SimpleDelivery::find($request->delivery_area);
+            if ($deliveryAreaElement) {
+                $deliveryAreaName = $deliveryAreaElement->name;
             }
-            $customFields['delivery_area_name']=$deliveryAreaName;
+            $customFields['delivery_area_name'] = $deliveryAreaName;
         }
 
-        $requestData=[
+        $requestData = [
             'vendor_id'   => $vendor_id,
-            'delivery_method'=> $delivery_method,
-            'payment_method'=> $request->paymentType?$request->paymentType:"cod",
-            'address_id'=>$request->addressID,
-            "timeslot"=>$request->timeslot,
-            "items"=>$items,
-            "comment"=>$request->comment,
-            "stripe_token"=>$stripe_token,
-            "dinein_table_id"=>$table_id,
-            "phone"=>$phone,
-            "customFields"=>$customFields,
-            "deliveryAreaId"=> $deliveryAreaId
+            'delivery_method' => $delivery_method,
+            'payment_method' => $request->paymentType ? $request->paymentType : "cod",
+            'address_id' => $request->addressID,
+            "timeslot" => $request->timeslot,
+            "items" => $items,
+            "comment" => $request->comment,
+            "stripe_token" => $stripe_token,
+            "dinein_table_id" => $table_id,
+            "phone" => $phone,
+            "customFields" => $customFields,
+            "deliveryAreaId" => $deliveryAreaId
         ];
 
-        
+
 
         return new Request($requestData);
     }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
 
-    public function store(Request $request){
+    public function create(Request $request)
+    {
+        if (auth()->user()->hasRole('owner')) {
+            $categories = auth()->user()->restorant->categories;
+
+            return view('quotations.create', [
+                'categories' => $categories,
+                'restorant_id' => auth()->user()->restorant->id,
+              
+            ]);
+        }else {
+            return redirect()->route('quotations.index')->withStatus(__('No Access'));
+        }
+    }
+
+    public function store(Request $request)
+    {
 
         //Convert web request to mobile like request
-        $mobileLikeRequest=$this->toMobileLike($request);
+        $mobileLikeRequest = $this->toMobileLike($request);
 
         //Data
         $vendor_id =  $mobileLikeRequest->vendor_id;
-        $expedition= $mobileLikeRequest->delivery_method;
-        $hasPayment= $mobileLikeRequest->payment_method!="cod";
-        $isStripe= $mobileLikeRequest->payment_method=="stripe";
+        $expedition = $mobileLikeRequest->delivery_method;
+        $hasPayment = $mobileLikeRequest->payment_method != "cod";
+        $isStripe = $mobileLikeRequest->payment_method == "stripe";
 
-        $vendorHasOwnPayment=null;
-        if(config('settings.social_mode')){
+        $vendorHasOwnPayment = null;
+        if (config('settings.social_mode')) {
             //Find the vendor, and check if he has payment
-        
-            $vendor=Restorant::findOrFail($mobileLikeRequest->vendor_id);
+
+            $vendor = Restorant::findOrFail($mobileLikeRequest->vendor_id);
 
             //Payment methods
             foreach (Module::all() as $key => $module) {
-                if($module->get('isPaymentModule')){
-                    if($vendor->getConfig($module->get('alias')."_enable","false")=="true"){
-                        $vendorHasOwnPayment=$module->get('alias');
+                if ($module->get('isPaymentModule')) {
+                    if ($vendor->getConfig($module->get('alias') . "_enable", "false") == "true") {
+                        $vendorHasOwnPayment = $module->get('alias');
                     }
                 }
             }
 
-            if($vendorHasOwnPayment==null){
-                $hasPayment=false;
+            if ($vendorHasOwnPayment == null) {
+                $hasPayment = false;
             }
         }
 
         //Repo Holder
-        $quotationRepo=QuotationRepoGenerator::makeQuotationRepo($vendor_id,$mobileLikeRequest,$expedition,$hasPayment,$isStripe,false,$vendorHasOwnPayment);
+        $quotationRepo = QuotationRepoGenerator::makeQuotationRepo($vendor_id, $mobileLikeRequest, $expedition, $hasPayment, $isStripe, false, $vendorHasOwnPayment);
 
         //Proceed with validating the data
-        $validator=$quotationRepo->validateData();
-        if ($validator->fails()) { 
+        $validator = $quotationRepo->validateData();
+        if ($validator->fails()) {
             notify()->error($validator->errors()->first());
-            return $quotationRepo->redirectOrInform(); 
+            return $quotationRepo->redirectOrInform();
         }
 
         //Proceed with making the quotation
-        $validatorOnMaking=$quotationRepo->makeQuotation();
-        if ($validatorOnMaking->fails()) { 
-            notify()->error($validatorOnMaking->errors()->first()); 
-            return $quotationRepo->redirectOrInform(); 
+        $validatorOnMaking = $quotationRepo->makeQuotation();
+        if ($validatorOnMaking->fails()) {
+            notify()->error($validatorOnMaking->errors()->first());
+            return $quotationRepo->redirectOrInform();
         }
 
         return $quotationRepo->redirectOrInform();
@@ -362,7 +374,7 @@ class QuotationController extends Controller
     public function show(Quotation $quotation)
     {
         //Do we have pdf invoice
-        $pdFInvoice=Module::has('pdf-invoice');
+        $pdFInvoice = Module::has('pdf-invoice');
 
         //Change currency
         ConfChanger::switchCurrency($quotation->restorant);
@@ -376,18 +388,19 @@ class QuotationController extends Controller
             $driversData[$driver->id] = $driver->name;
         }
 
-        if (auth()->user()->hasRole('client') && auth()->user()->id == $quotation->client_id ||
+        if (
+            auth()->user()->hasRole('client') && auth()->user()->id == $quotation->client_id ||
             auth()->user()->hasRole('owner') && auth()->user()->id == $quotation->restorant->user->id ||
             auth()->user()->hasRole('staff') && auth()->user()->restaurant_id == $quotation->restorant->id ||
-                auth()->user()->hasRole('driver') && auth()->user()->id == $quotation->driver_id || auth()->user()->hasRole('admin')
-            ) {
+            auth()->user()->hasRole('driver') && auth()->user()->id == $quotation->driver_id || auth()->user()->hasRole('admin')
+        ) {
             return view('quotations.show', [
-                'quotation'=>$quotation,
-                'pdFInvoice'=>$pdFInvoice,
-                'custom_data'=>$quotation->getAllConfigs(),
-                'statuses'=>Status::pluck('name', 'id'), 
-                'drivers'=>$drivers,
-                'fields'=>[['class'=>'col-12', 'classselect'=>'noselecttwo', 'ftype'=>'select', 'name'=>'Driver', 'id'=>'driver', 'placeholder'=>'Assign Driver', 'data'=>$driversData, 'required'=>true]],
+                'quotation' => $quotation,
+                'pdFInvoice' => $pdFInvoice,
+                'custom_data' => $quotation->getAllConfigs(),
+                'statuses' => Status::pluck('name', 'id'),
+                'drivers' => $drivers,
+                'fields' => [['class' => 'col-12', 'classselect' => 'noselecttwo', 'ftype' => 'select', 'name' => 'Driver', 'id' => 'driver', 'placeholder' => 'Assign Driver', 'data' => $driversData, 'required' => true]],
             ]);
         } else {
             return redirect()->route('quotations.index')->withStatus(__('No Access.'));
@@ -441,8 +454,8 @@ class QuotationController extends Controller
 
         //If owner, only from his restorant
         if (auth()->user()->hasRole('owner')) {
-            $quotations = $quotations->where(['restorant_id'=>auth()->user()->restorant->id]);
-            
+            $quotations = $quotations->where(['restorant_id' => auth()->user()->restorant->id]);
+
             //Change currency
             ConfChanger::switchCurrency(auth()->user()->restorant);
 
@@ -451,7 +464,7 @@ class QuotationController extends Controller
         }
         $quotations = $quotations->with(['status', 'client', 'restorant', 'table.restoarea'])->get()->toArray();
 
-        
+
 
         $newQuotations = [];
         $acceptedQuotations = [];
@@ -459,31 +472,31 @@ class QuotationController extends Controller
 
         $items = [];
         foreach ($quotations as $key => $quotation) {
-            $client="";
-            if(config('app.isft')){
-                $client=$quotation['client']['name'];
-            }else{
-                if(!config('settings.is_whatsapp_quotationing_mode')){
+            $client = "";
+            if (config('app.isft')) {
+                $client = $quotation['client']['name'];
+            } else {
+                if (!config('settings.is_whatsapp_quotationing_mode')) {
                     //QR
-                    if($quotation['table']&&$quotation['table']['restoarea']&&$quotation['table']['restoarea']['name']&&$quotation['table']['name']){
-                        $client=$quotation['table']['restoarea']['name'].' - '.$quotation['table']['name'];
-                    }else if($quotation['table']&&$quotation['table']['name']){
-                        $client=$quotation['table']['name'];
+                    if ($quotation['table'] && $quotation['table']['restoarea'] && $quotation['table']['restoarea']['name'] && $quotation['table']['name']) {
+                        $client = $quotation['table']['restoarea']['name'] . ' - ' . $quotation['table']['name'];
+                    } else if ($quotation['table'] && $quotation['table']['name']) {
+                        $client = $quotation['table']['name'];
                     }
-                }else{
+                } else {
                     //WhatsApp
-                    $client=$quotation['phone'];
+                    $client = $quotation['phone'];
                 }
             }
             array_push($items, [
-                'id'=>$quotation['id'],
-                'restaurant_name'=>$quotation['restorant']['name'],
-                'last_status'=>count($quotation['status']) > 0 ? __($quotation['status'][count($quotation['status']) - 1]['name']) : 'Just created',
-                'last_status_id'=>count($quotation['status']) > 0 ? $quotation['status'][count($quotation['status']) - 1]['pivot']['status_id'] : 1,
-                'time'=>$quotation['updated_at'],
-                'client'=>$client,
-                'link'=>'/quotations/'.$quotation['id'],
-                'price'=>money($quotation['quotation_price'], config('settings.cashier_currency'), config('settings.do_convertion')).'',
+                'id' => $quotation['id'],
+                'restaurant_name' => $quotation['restorant']['name'],
+                'last_status' => count($quotation['status']) > 0 ? __($quotation['status'][count($quotation['status']) - 1]['name']) : 'Just created',
+                'last_status_id' => count($quotation['status']) > 0 ? $quotation['status'][count($quotation['status']) - 1]['pivot']['status_id'] : 1,
+                'time' => $quotation['updated_at'],
+                'client' => $client,
+                'link' => '/quotations/' . $quotation['id'],
+                'price' => money($quotation['quotation_price'], config('settings.cashier_currency'), config('settings.do_convertion')) . '',
             ]);
         }
 
@@ -525,7 +538,7 @@ class QuotationController extends Controller
         if (auth()->user()->hasRole('owner')) {
             foreach ($items as $key => $item) {
 
-                
+
                 //Box 1 - New Quotations
                 //Today quotations that are approved by admin ( Needs approvment or rejection )
                 //Box 2 - Accepted
@@ -553,10 +566,10 @@ class QuotationController extends Controller
         }
 
         $toRespond = [
-                'newquotations'=>$newQuotations,
-                'accepted'=>$acceptedQuotations,
-                'done'=>$doneQuotations,
-            ];
+            'newquotations' => $newQuotations,
+            'accepted' => $acceptedQuotations,
+            'done' => $doneQuotations,
+        ];
 
         return response()->json($toRespond);
     }
@@ -572,7 +585,7 @@ class QuotationController extends Controller
         $restaurant_id = $quotation->restorant_id;
 
         //1. Get all the working drivers, where active and working
-        $theQuery = User::role('driver')->where(['active'=>1, 'working'=>1]);
+        $theQuery = User::role('driver')->where(['active' => 1, 'working' => 1]);
 
         //2. Get Drivers with their assigned quotation, where payment_status is unpaid yet, this quotation is still not delivered and not more than 1
         $theQuery = $theQuery->whereHas('driverquotations', function (Builder $query) {
@@ -596,7 +609,7 @@ class QuotationController extends Controller
             ///dd('driver found: '.$driversWithGeoIDS[0]);
             $quotation->driver_id = $driversWithGeoIDS[0];
             $quotation->update();
-            $quotation->status()->attach([4 => ['comment'=>'System', 'user_id' => $driversWithGeoIDS[0]]]);
+            $quotation->status()->attach([4 => ['comment' => 'System', 'user_id' => $driversWithGeoIDS[0]]]);
 
             //Now increment the driver quotations
             $theDriver = User::findOrFail($quotation->driver_id);
@@ -645,20 +658,20 @@ class QuotationController extends Controller
         //
 
         $rolesNeeded = [
-            'accepted_by_admin'=>'admin',
-            'assigned_to_driver'=>'admin',
-            'rejected_by_admin'=>'admin',
-            'accepted_by_restaurant'=>['owner', 'staff'],
-            'prepared'=>['owner', 'staff'],
-            'rejected_by_restaurant'=>['owner', 'staff'],
-            'picked_up'=>['driver', 'owner', 'staff'],
-            'delivered'=>['driver', 'owner', 'staff'],
-            'closed'=>['owner', 'staff'],
-            'accepted_by_driver'=>['driver'],
-            'rejected_by_driver'=>['driver']
+            'accepted_by_admin' => 'admin',
+            'assigned_to_driver' => 'admin',
+            'rejected_by_admin' => 'admin',
+            'accepted_by_restaurant' => ['owner', 'staff'],
+            'prepared' => ['owner', 'staff'],
+            'rejected_by_restaurant' => ['owner', 'staff'],
+            'picked_up' => ['driver', 'owner', 'staff'],
+            'delivered' => ['driver', 'owner', 'staff'],
+            'closed' => ['owner', 'staff'],
+            'accepted_by_driver' => ['driver'],
+            'rejected_by_driver' => ['driver']
         ];
 
-        if (! auth()->user()->hasRole($rolesNeeded[$alias])) {
+        if (!auth()->user()->hasRole($rolesNeeded[$alias])) {
             abort(403, 'Unauthorized action. You do not have the appropriate role');
         }
 
@@ -694,35 +707,35 @@ class QuotationController extends Controller
         // dd($status_id_to_attach."");
 
         if (config('app.isft')) {
-            if ($status_id_to_attach.'' == '3' || $status_id_to_attach.'' == '5' || $status_id_to_attach.'' == '9') {
+            if ($status_id_to_attach . '' == '3' || $status_id_to_attach . '' == '5' || $status_id_to_attach . '' == '9') {
                 $quotation->client->notify(new QuotationNotification($quotation, $status_id_to_attach));
             }
 
-            if ($status_id_to_attach.'' == '4') {
+            if ($status_id_to_attach . '' == '4') {
                 $quotation->driver->notify(new QuotationNotification($quotation, $status_id_to_attach));
             }
         }
 
         //Picked up - start tracing
-        if ($status_id_to_attach.'' == '6') {
+        if ($status_id_to_attach . '' == '6') {
             $quotation->lat = $quotation->restorant->lat;
             $quotation->lng = $quotation->restorant->lng;
             $quotation->update();
         }
 
-        if (config('app.isft') && $alias.'' == 'delivered') {
+        if (config('app.isft') && $alias . '' == 'delivered') {
             $quotation->payment_status = 'paid';
             $quotation->update();
         }
 
-        if (config('app.isqrsaas') && $alias.'' == 'closed') {
+        if (config('app.isqrsaas') && $alias . '' == 'closed') {
             $quotation->payment_status = 'paid';
             $quotation->update();
         }
 
         if (config('app.isft')) {
             //When quotations is accepted by restaurant, auto assign to driver
-            if ($status_id_to_attach.'' == '3') {
+            if ($status_id_to_attach . '' == '3') {
                 if (config('settings.allow_automated_assign_to_driver')) {
                     $this->autoAssignToDriver($quotation);
                 }
@@ -730,19 +743,19 @@ class QuotationController extends Controller
         }
 
         //$quotation->status()->attach([$status->id => ['comment'=>"",'user_id' => auth()->user()->id]]);
-        $quotation->status()->attach([$status_id_to_attach => ['comment'=>'', 'user_id' => auth()->user()->id]]);
+        $quotation->status()->attach([$status_id_to_attach => ['comment' => '', 'user_id' => auth()->user()->id]]);
 
 
         //Dispatch event
-        if($alias=="accepted_by_restaurant"){
+        if ($alias == "accepted_by_restaurant") {
             QuotationAcceptedByVendor::dispatch($quotation);
         }
-        if($alias=="accepted_by_admin"){
+        if ($alias == "accepted_by_admin") {
             //IN FT send email
             if (config('app.isft')) {
                 $quotation->restorant->user->notify((new QuotationNotification($quotation))->locale(strtolower(config('settings.app_locale'))));
             }
-            
+
             QuotationAcceptedByAdmin::dispatch($quotation);
         }
 
@@ -762,7 +775,7 @@ class QuotationController extends Controller
 
         $restorant->ratings()->save($rating);
 
-        return redirect()->route('quotations.show', ['quotation'=>$quotation])->withStatus(__('Quotation succesfully rated!'));
+        return redirect()->route('quotations.show', ['quotation' => $quotation])->withStatus(__('Quotation succesfully rated!'));
     }
 
     public function checkQuotationRating(Quotation $quotation)
@@ -770,7 +783,7 @@ class QuotationController extends Controller
         $rating = DB::table('ratings')->select('rating')->where(['quotation_id' => $quotation->id])->get()->first();
         $is_rated = false;
 
-        if (! empty($rating)) {
+        if (!empty($rating)) {
             $is_rated = true;
         }
 
@@ -778,7 +791,7 @@ class QuotationController extends Controller
             [
                 'rating' => $rating->rating,
                 'is_rated' => $is_rated,
-                ]
+            ]
         );
     }
 
@@ -794,29 +807,29 @@ class QuotationController extends Controller
             $backUrl = route('vendor', $quotation->restorant->subdomain);
         }
 
-        return view('quotations.guestquotations', ['backUrl'=>$backUrl, 'quotations'=>$quotations, 'statuses'=>Status::pluck('name', 'id')]);
+        return view('quotations.guestquotations', ['backUrl' => $backUrl, 'quotations' => $quotations, 'statuses' => Status::pluck('name', 'id')]);
     }
 
 
     public function generateQuotationMsg($address, $comment, $price)
     {
-        $title = 'New quotation #'.strtoupper(Str::random(5))."\n\n";
+        $title = 'New quotation #' . strtoupper(Str::random(5)) . "\n\n";
 
-        $price = '*Price*: '.$price.' '.config('settings.cashier_currency')."\n\n";
+        $price = '*Price*: ' . $price . ' ' . config('settings.cashier_currency') . "\n\n";
 
-        $items = '*Quotation:*'."\n";
+        $items = '*Quotation:*' . "\n";
         foreach (Cart::getContent() as $key => $item) {
-            $items .= strval($item->quantity).' x '.$item->name."\n";
+            $items .= strval($item->quantity) . ' x ' . $item->name . "\n";
         }
         $items .= "\n";
-        $final = $title.$price.$items;
+        $final = $title . $price . $items;
 
         if ($address != null) {
-            $final .= '*Address*:'."\n".$address."\n\n";
+            $final .= '*Address*:' . "\n" . $address . "\n\n";
         }
 
         if ($comment != null) {
-            $final .= '*Comment:*'."\n".$comment."\n\n";
+            $final .= '*Comment:*' . "\n" . $comment . "\n\n";
         }
 
         return urlencode($final);
@@ -826,23 +839,23 @@ class QuotationController extends Controller
     {
         $quotationPrice = Cart::getSubTotal();
 
-        $title = 'New quotation #'.strtoupper(Str::random(5))."\n\n";
+        $title = 'New quotation #' . strtoupper(Str::random(5)) . "\n\n";
 
-        $price = '*Price*: '.$quotationPrice.' '.config('settings.cashier_currency')."\n\n";
+        $price = '*Price*: ' . $quotationPrice . ' ' . config('settings.cashier_currency') . "\n\n";
 
-        $items = '*Quotation:*'."\n";
+        $items = '*Quotation:*' . "\n";
         foreach (Cart::getContent() as $key => $item) {
-            $items .= strval($item->quantity).' x '.$item->name."\n";
+            $items .= strval($item->quantity) . ' x ' . $item->name . "\n";
         }
         $items .= "\n";
-        $final = $title.$price.$items;
+        $final = $title . $price . $items;
 
         if ($request->address != null) {
-            $final .= '*Address*:'."\n".$request->address."\n\n";
+            $final .= '*Address*:' . "\n" . $request->address . "\n\n";
         }
 
         if ($request->comment != null) {
-            $final .= '*Comment:*'."\n".$request->comment."\n\n";
+            $final .= '*Comment:*' . "\n" . $request->comment . "\n\n";
         }
 
         return response()->json(
@@ -870,7 +883,7 @@ class QuotationController extends Controller
 
         $text = $this->generateWhatsappQuotation($request->exists('addressID') ? $request->addressID : null, $request->exists('comment') ? $request->comment : null, $quotationPrice);
 
-        $url = 'https://wa.me/'.$restorant->whatsapp_phone.'?text='.$text;
+        $url = 'https://wa.me/' . $restorant->whatsapp_phone . '?text=' . $text;
 
         Cart::clear();
 
@@ -878,45 +891,45 @@ class QuotationController extends Controller
     }
 
     public function cancel(Request $request)
-    {   
+    {
         $quotation = Quotation::findOrFail($request->quotation);
         return view('quotations.cancel', ['quotation' => $quotation]);
     }
 
     public function success(Request $request)
-    {   
+    {
         $quotation = Quotation::findOrFail($request->quotation);
 
         //If quotation is not paid - redirect to payment
-        if($request->redirectToPayment.""=="1"&&$quotation->payment_status != 'paid'&&strlen($quotation->payment_link)>5){
+        if ($request->redirectToPayment . "" == "1" && $quotation->payment_status != 'paid' && strlen($quotation->payment_link) > 5) {
             //Redirect to payment
             return redirect($quotation->payment_link);
-        } 
+        }
 
         //If we have whatsapp send
-        if($request->has('whatsapp')){
-            $message=$quotation->getSocialMessageAttribute(true);
-            $url = 'https://api.whatsapp.com/send?phone='.$quotation->restorant->whatsapp_phone.'&text='.$message;
+        if ($request->has('whatsapp')) {
+            $message = $quotation->getSocialMessageAttribute(true);
+            $url = 'https://api.whatsapp.com/send?phone=' . $quotation->restorant->whatsapp_phone . '&text=' . $message;
             return Redirect::to($url);
         }
 
         //Should we show whatsapp send quotation
-        $showWhatsApp=config('settings.whatsapp_quotationing_enabled');
+        $showWhatsApp = config('settings.whatsapp_quotationing_enabled');
 
-        if($showWhatsApp){
+        if ($showWhatsApp) {
             //Disable when WhatsApp Mode
-            if(config('settings.is_whatsapp_quotationing_mode')){
-                $showWhatsApp=false;
+            if (config('settings.is_whatsapp_quotationing_mode')) {
+                $showWhatsApp = false;
             }
 
             //In QR, if owner phone is not set, hide the button
             //In FT, we use owner phone to have the number
-            if(strlen($quotation->restorant->whatsapp_phone)<3){
-                $showWhatsApp=false;
+            if (strlen($quotation->restorant->whatsapp_phone) < 3) {
+                $showWhatsApp = false;
             }
         }
 
-        
-        return view('quotations.success', ['quotation' => $quotation,'showWhatsApp'=>$showWhatsApp]);
+
+        return view('quotations.success', ['quotation' => $quotation, 'showWhatsApp' => $showWhatsApp]);
     }
 }
