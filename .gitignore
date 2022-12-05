@@ -1,1 +1,3 @@
-storage/framework/sessions/
+/storage/framework/sessions/
+/storage/framework/views/
+\storage\framework\views\
