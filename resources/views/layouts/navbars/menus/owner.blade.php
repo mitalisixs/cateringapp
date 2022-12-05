@@ -30,6 +30,11 @@
             <i class="ni ni-collection text-pink"></i> {{ __('Menu') }}
         </a>
     </li>
+    <li class="nav-item">
+            <a class="nav-link" href="{{ route('quotations.index') }}">
+                <i class="ni ni-basket text-orangse"></i> {{ __('Quotation') }}
+            </a>
+    </li>
 
     @if (config('app.isqrsaas') && (!config('settings.qrsaas_disable_odering') || config('settings.enable_guest_log')))
         @if(!config('settings.is_whatsapp_ordering_mode'))
@@ -102,5 +107,6 @@
                 </a>
         </li>
     @endforeach
+    
 
 </ul>

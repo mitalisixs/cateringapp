@@ -145,6 +145,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('clients', 'ClientController');
     Route::resource('orders', 'OrderController');
+    Route::resource('quotations', 'QuotationController');
     Route::post('/rating/{order}', 'OrderController@rateOrder')->name('rate.order');
     Route::get('/check/rating/{order}', 'OrderController@checkOrderRating')->name('check.rating');
 
