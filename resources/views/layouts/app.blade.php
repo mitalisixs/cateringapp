@@ -27,6 +27,8 @@
         <link type="text/css" href="{{ asset('argon') }}/css/argon.css?v=1.0.0" rel="stylesheet">
         <!-- Argon CSS -->
         <link type="text/css" href="{{ asset('custom') }}/css/custom.css" rel="stylesheet">
+
+        <link type="text/css" href="{{ asset('custom') }}/css/catering_custom.css" rel="stylesheet">
         <!-- Select2 -->
         <link type="text/css" href="{{ asset('custom') }}/css/select2.min.css" rel="stylesheet">
 
@@ -99,12 +101,14 @@
         <!-- Custom js -->
         <script src="{{ asset('custom') }}/js/orders.js"></script>
          <!-- Custom js -->
-        <script src="{{ asset('custom') }}/js/mresto.js"></script>
+       
         <!-- AJAX -->
 
         <!-- SELECT2 -->
         <script src="{{ asset('custom') }}/js/select2.js"></script>
         <script src="{{ asset('vendor') }}/select2/select2.min.js"></script>
+
+        <script src="{{ asset('custom') }}/js/mresto.js"></script>
 
         <!-- DATE RANGE PICKER -->
         <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>

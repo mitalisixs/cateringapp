@@ -1,0 +1,249 @@
+ 
+.option-box,
+.order-box {  
+	position: relative;
+	background: #fff;
+  	margin: 0 0 30px 0;
+	padding: 30px 15px;
+	border: 1px solid #ddd;		
+}
+
+.option-box-header {
+	margin: 0 15px 10px 15px;
+	width: 100%;
+	border-bottom: 2px dotted #ddd;
+}
+
+.order-box-header {
+	margin: 0 15px 20px 15px;
+	width: 100%;
+	border-bottom: 2px dotted #ddd;	
+}
+
+.option-box-header h3,
+.order-box-header h3 {
+	font-size: 20px;	
+	color: #555;	
+}
+
+.option-box-header p,
+.order-box-header p {	
+	font-size: 14px;
+	font-weight: 400;
+	margin-bottom: 20px;
+	color: #999;
+}
+
+.option-box-link,
+.option-box-link:focus,
+.option-box-link:active,
+.option-box-link:visited {
+	color: #555;
+    font-size: 11px;
+    font-weight: 500;
+    border: 1px solid #ddd;
+    background: #fff;
+    margin-left: 5px;
+    padding: 4px 8px;
+    position: absolute;
+    top: -1px;
+    right: -1px;
+}
+
+.option-box-link:hover {
+	background: #02b843;
+	border: 1px solid #02b843;
+	color: #fff;
+}
+#orderContainer,
+#personalDetails {  
+	background: #fff;  
+  	margin-bottom: 30px;
+	padding: 30px !important;
+	border: 1px solid #ddd;	
+}
+/* Ribbon Left */
+
+.ribbon-left {
+	position: absolute;
+    left: -5px;
+    top: -5px;
+    z-index: 1;
+    overflow: hidden;
+    width: 75px;
+    height: 75px;
+	text-align: right;
+}
+
+.ribbon-left span.left {
+    font-size: 10px;
+    font-weight: 700;
+    font-style: normal;
+    color: #555;
+	text-align: center;
+	text-transform: uppercase;
+    line-height: 20px;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    width: 100px;
+    display: block;
+    background: #ffda8f;    
+    -webkit-box-shadow: 0 3px 10px -5px #000;
+    -moz-box-shadow: 0 3px 10px -5px #000;
+    box-shadow: 0 3px 10px -5px #000;
+    text-shadow: 1px 1px 2px rgba(0,0,0,.25);
+    position: absolute;
+    top: 19px;
+    left: -21px;
+}
+
+.ribbon-left span.left::before,
+.ribbon-left span.left::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    z-index: -1;
+    border-bottom: 3px solid transparent;
+    border-top: 3px solid #ffda8f;
+}
+
+.ribbon-left span.left::before {
+    left: 0;
+    border-left: 3px solid #ffda8f;
+    border-right: 3px solid transparent;
+}
+
+.ribbon-left span.left::after {
+    right: 0;
+    border-left: 3px solid transparent;
+    border-right: 3px solid #ffda8f;
+}
+/* .select2-container{
+    font-size:.875rem;
+    line-height:1.5;
+    height: calc(2.75rem + 2px);
+    padding: .625rem .75rem;
+
+    transition: all .2s cubic-bezier(.68, -.55, .265, 1.55);
+
+    color: #8898aa;
+    border: 1px solid #cad1d7;
+    border-radius: .375rem;
+    background-color: #fff;
+    background-clip: padding-box;
+    box-shadow: none;
+} */
+/* Order Summary
+==================================== */
+
+/* Header */
+
+#orderContainer h3 {
+	font-size: 16px;
+	font-weight: 700;
+	color: #555;
+	margin-bottom: 30px;
+}
+
+/* List */
+
+#orderContainer span {	
+	font-size: 14px;
+	font-weight: 700;
+}
+
+#orderContainer ul {
+	list-style: none;
+  	padding: 15px 0;
+  	margin: 0;
+}
+
+#orderSumList li {
+	font-family: 'Karla', sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+}
+
+#orderSumList li i {
+  	color: #02b843;
+}
+
+#orderContainer ul li span.price,
+.price {
+	float: right;
+}
+
+#orderContainer .total-container {    
+  	border-top: 2px dotted #ddd;
+  	border-bottom: 2px dotted #ddd;
+  	padding: 10px 0;
+  	margin: 10px 0;  
+}
+
+#orderSumList li {
+	font-family: 'Karla', sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+}
+
+#orderSumList li i {
+  	color: #02b843;
+}
+
+/* Order Summary Footer */
+
+@media (max-width: 991px) {		
+	/* Header
+	==================================== */
+	header.main-header.sticky {		
+		position: static;
+	}
+	header .container {	
+		width: 100% !important;
+		margin-right: auto !important;
+		margin-left: auto !important;
+		padding-right: 15px !important;
+		padding-left: 15px !important;
+		width: 100% !important;
+		max-width: 100%;
+	}
+	/* Header Menu Chevron Down */
+	.main-menu a i {
+		display: none;
+	}	
+	/* Header Icons */
+	ul#menuIcons {		
+		right: 0;
+		top: 2px;
+	}	
+	/* Logo */
+	#logo {
+		position: relative;
+		left: 45px;
+	}
+	/* Sub Header
+	==================================== */
+	.sub-header {
+		margin-top: 0;
+	}		
+	/* Containers
+	==================================== */	
+	#orderContainer,
+	#personalDetails {		
+		margin-bottom: 15px;		
+	}
+	.order {
+		padding: 15px 0 0 0;
+	}			
+	.option-box {
+		margin: 0 0 15px 0;
+	}
+	/* Color Panel */
+	#colorPanel {
+		display: none;
+	}		
+	
+}

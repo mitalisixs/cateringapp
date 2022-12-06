@@ -167,12 +167,12 @@ var js = {
       })
     },
     modal: function (){
-      $('.modal-content').resizable({
-        //alsoResize: ".modal-dialog",
-        minHeight: 300,
-        minWidth: 300
-      });
-      $('.modal-dialog').draggable();
+      // $('.modal-content').resizable({
+      //   //alsoResize: ".modal-dialog",
+      //   minHeight: 300,
+      //   minWidth: 300
+      // });
+      // $('.modal-dialog').draggable();
   
       $('#myModal').on('show.bs.modal', function() {
         $(this).find('.modal-body').css({
@@ -181,7 +181,7 @@ var js = {
       });
     },
     select : function(){
-      $("select").not(".noselecttwo").each(function( $pos ){
+      $("select").each(function( $pos ){
         var $this = $(this);
         if (!$this.hasClass("select2init")){
           $settings = {};
@@ -203,7 +203,9 @@ var js = {
             $settings.id = "-1";
           }
   
-          $this.select2($settings);
+          $this.select2($settings).on("select2:select", function(e) { 
+             updateOrderSummary();
+          });
         }
       });
     },
@@ -257,3 +259,12 @@ $.tpl = function(template, data){
   });
 };
 $.expr[':'].contains = function(a, i, m) { return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0; };
+function updateOrderSummary(){
+  $("#orderSumList").html('');
+  $(".item_list").each(function(){
+      if($(this).val()!=0){
+        var optionvalue= $(this).find('option:selected').text();
+        $("#orderSumList").append("<li>"+optionvalue+"</li>");
+      }
+  });
+}
